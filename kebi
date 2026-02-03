@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Keb n Konjo ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: linear-gradient(120deg,#0f0c29,#302b63,#24243e);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  overflow: hidden;
+}
+
+.container {
+  width: 90%;
+  max-width: 500px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(15px);
+  border-radius: 25px;
+  padding: 35px 28px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+  text-align: center;
+  animation: fadeUp 1s ease;
+}
+
+.hidden { display: none; }
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.4rem;
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-weight: 300;
+  font-size: 1.1rem;
+  margin-bottom: 22px;
+  opacity: 0.9;
+}
+
+.story {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 22px;
+}
+
+.photo {
+  width: 100%;
+  border-radius: 18px;
+  margin: 20px 0;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+}
+
+.btn {
+  padding: 14px 28px;
+  border-radius: 30px;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  margin: 8px;
+  transition: 0.3s ease;
+}
+
+.yes {
+  background: #ff4b7d;
+  color: white;
+}
+
+.no {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.5);
+  color: white;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.heart {
+  position: absolute;
+  font-size: 18px;
+  opacity: 0.4;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(100vh); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: translateY(-10vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div class="container" id="page1">
+  <h1>Keb n Konjo</h1>
+  <h2>our little world ❤️</h2>
+
+  <img src="us1.jpg" class="photo">
+
+  <div class="story">
+    Out of everyone in this world,  
+    you became my favorite person without even trying.
+  </div>
+
+  <button class="btn yes" onclick="nextPage()">Continue</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="container hidden" id="page2">
+  <h1>Konjo</h1>
+  <h2>from Keb</h2>
+
+  <img src="us2.jpg" class="photo">
+
+  <div class="story">
+    I don’t just like you —  
+    I like how I am when I’m with you.
+  </div>
+
+  <button class="btn yes" onclick="finalPage()">One more thing</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="container hidden" id="page3">
+  <h1>💖 Keb n Konjo 💖</h1>
+  <h2 id="noText">so tell me…</h2>
+
+  <div class="story" style="font-size:1.25rem;">
+    Will you be my Valentine?
+  </div>
+
+  <button class="btn yes" id="yesBtn" onclick="accept()">Yes</button>
+  <button class="btn no" onclick="noClicked()">No</button>
+</div>
+
+<!-- PAGE 4 -->
+<div class="container hidden" id="page4">
+  <h1>❤️</h1>
+  <h2>It’s official</h2>
+
+  <div class="story">
+    Thank you for choosing me.  
+    Happy Valentine’s Day, my love.
+  </div>
+</div>
+
+<script>
+let noCount = 0;
+const messages = [
+  "are you sure?",
+  "think again 😭",
+  "last chance fr…",
+  "cmon konjo 😔",
+  "you really saying no to keb?"
+];
+
+function nextPage() {
+  page1.classList.add('hidden');
+  page2.classList.remove('hidden');
+}
+
+function finalPage() {
+  page2.classList.add('hidden');
+  page3.classList.remove('hidden');
+}
+
+function accept() {
+  page3.classList.add('hidden');
+  page4.classList.remove('hidden');
+}
+
+function noClicked() {
+  noCount++;
+  document.getElementById('noText').innerText =
+    messages[Math.min(noCount-1, messages.length-1)];
+
+  const yesBtn = document.getElementById('yesBtn');
+  yesBtn.style.transform = `scale(${1 + noCount * 0.3})`;
+}
+
+setInterval(() => {
+  const heart = document.createElement('div');
+  heart.className = 'heart';
+  heart.innerHTML = '❤️';
+  heart.style.left = Math.random() * 100 + 'vw';
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}, 500);
+</script>
+
+</body>
+</html>
